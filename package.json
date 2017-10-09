@@ -1,0 +1,21 @@
+{
+  "name": "compound",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "1.0.14"
+  },
+  "dependencies": {
+    "numeral": "^2.0.6",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "rebass": "^1.0.4",
+    "styled-components": "^2.2.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
