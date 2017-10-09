@@ -37,6 +37,7 @@ export default class MoneyInput extends Component {
   render () {
     return (
       <Input
+        p={2}
         type={this.state.focused ? 'number' : 'text'}
         name={this.props.name}
         min="0"

@@ -6,7 +6,21 @@ import MoneyInput from './components/MoneyInput'
 import PercentInput from './components/PercentInput'
 import YearInput from './components/YearInput'
 
-import { Box, Heading, Label, Provider } from 'rebass'
+import styled, { injectGlobal } from 'styled-components'
+import { Box, Flex, Heading, Label, Provider } from 'rebass'
+
+injectGlobal`
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+`
+
+const StyledHeading = styled(Heading)`
+  text-align: center;
+`
 
 class App extends Component {
   constructor (props) {
@@ -135,65 +149,78 @@ class App extends Component {
 
     return (
       <Provider>
+        <StyledHeading p={2} f={4} is='h1'>Compound Interest Calculator</StyledHeading>
+        <Flex p={2} wrap>
+          <Box mb={3} w='100%'>
+            <Label>Initial Deposit</Label>
+            <MoneyInput
+              name="initialDeposit"
+              inputValue={this.state.initialDeposit}
+              onUpdate={this.updateInitialDeposit}
+            />
+          </Box>
 
-        <Heading is='h1'>Strategy</Heading>
+          <Box mb={3} w='100%'>
+            <Label>Regular Deposit</Label>
+            <MoneyInput
+              name="regularDeposit"
+              inputValue={this.state.regularDeposit}
+              onUpdate={this.updateRegularDeposit}
+            />
+          </Box>
 
-        <Box>
-          <Label>Initial Deposit</Label>
-          <MoneyInput
-            name="initialDeposit"
-            inputValue={this.state.initialDeposit}
-            onUpdate={this.updateInitialDeposit}
-          />
-        </Box>
+          <Box mb={3} w='100%'>
+            <Label>Number of Years (Max. 60)</Label>
+            <YearInput
+              name="numberOfYears"
+              inputValue={this.state.numberOfYears}
+              onUpdate={this.updateNumberOfYears}
+            />
+          </Box>
 
-        <Box>
-          <Label>Regular Deposit</Label>
-          <MoneyInput
-            name="regularDeposit"
-            inputValue={this.state.regularDeposit}
-            onUpdate={this.updateRegularDeposit}
-          />
-        </Box>
-
-        <Box>
-          <Label>Number of Years (Max. 60)</Label>
-          <YearInput
-            name="numberOfYears"
-            inputValue={this.state.numberOfYears}
-            onUpdate={this.updateNumberOfYears}
-          />
-        </Box>
+          <Box mb={3} w='100%'>
+            <Label>Interest Rate</Label>
+            <PercentInput
+              name="interestRate"
+              inputValue={this.state.interestRate}
+              onUpdate={this.updateInterestRate}
+            />
+          </Box>
+        </Flex>
 
 
-        <Label>Interest Rate</Label>
-        <PercentInput
-          name="interestRate"
-          inputValue={this.state.interestRate}
-          onUpdate={this.updateInterestRate}
-        />
+        <Heading f={3} p={2} is='h2'>Taxes</Heading>
+        <Flex p={2} wrap>
+          <Box mb={3} w='100%'>
+            <Label>Apply Tax</Label>
+            <input
+              type="checkbox"
+              name="applyTax"
+              checked={this.state.applyTax}
+              onChange={this.handleToggle}
+            />
+          </Box>
 
-        <Heading is='h2'>Taxes</Heading>
-        <Box>
-          <Label>Apply Tax</Label>
-          <input type="checkbox" name="applyTax" checked={this.state.applyTax}
-                 onChange={this.handleToggle}/>
-        </Box>
+          <Box mb={3} w='100%'>
+            <Label>Annual Income</Label>
+            <MoneyInput
+              name="annualIncome"
+              inputValue={this.state.annualIncome}
+              onUpdate={this.updateAnnualIncome}
+            />
+          </Box>
+        </Flex>
 
-        <Box>
-          <Label>Annual Income</Label>
-          <MoneyInput
-            name="annualIncome"
-            inputValue={this.state.annualIncome}
-            onUpdate={this.updateAnnualIncome}
-          />
-        </Box>
-
-        <Heading is='h2'>Results</Heading>
-        {/* <BarChart
-          labels={this.getYearlyInterest().map(yearlyInterest => yearlyInterest.name)}
-          data={data}
-        /> */}
+        <Flex wrap>
+          <Heading f={3} p={2} is='h2'>Results</Heading>
+          <Box px={3} py={4} bg={'green5'} w='100%'>
+            move to victory charts here
+            {/* <BarChart
+              labels={this.getYearlyInterest().map(yearlyInterest => yearlyInterest.name)}
+              data={data}
+            /> */}
+          </Box>
+        </Flex>
       </Provider>
     )
   }

@@ -37,6 +37,7 @@ export default class PercentInput extends Component {
   render () {
     return (
       <Input
+        p={2}
         step="0.01"
         type={this.state.focused ? 'number' : 'text'}
         name={this.props.name}
